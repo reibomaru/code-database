@@ -1,4 +1,5 @@
 const temperatureChart = document.getElementById('temperatureChart')
+const autoFitChart = document.getElementById('autoFitChart')
 const precipitationChart = document.getElementById('precipitationChart')
 const climateChart = document.getElementById('climateChart')
 
@@ -35,6 +36,29 @@ new Chart(temperatureChart, {
     }
 })
 
+new Chart(autoFitChart, {
+    type: 'line',
+    data: {
+        datasets: [{
+            label: 'data',
+            data: [0, 20, 40, 50],
+            "borderColor": "rgb(130, 156, 167)",
+            "backgroundColor": "rgb(130, 156, 167)",
+        }],
+        labels: ['1月', '2月', '3月', '4月']
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    suggestedMin: 50,
+                    suggestedMax: 100
+                }
+            }]
+        }
+    }
+})
+
 new Chart(precipitationChart, {
     "type": "bar",
     "data": {
@@ -43,16 +67,14 @@ new Chart(precipitationChart, {
             {
                 "label": "沖縄県",
                 "data": [107.0, 119.7, 161.4, 165.7, 231.6, 247.2, 141.4, 240.5, 260.5, 152.9, 110.2, 102.8],
-                "fill": false,
+                "borderWidth": 5,
                 "backgroundColor": "rgb(75, 192, 192)",
-                "lineTension": 0.1
             },
             {
                 "label": "東京都",
                 "data": [52.3, 56.1, 117.5, 124.5, 137.8, 167.7, 153.5, 168.2, 209.9, 197.8, 92.5, 51.0],
-                "fill": false,
+                "borderWidth": 5,
                 "backgroundColor": "rgb(130, 156, 167)",
-                "lineTension": 0.1
             }
         ]
     },
@@ -97,20 +119,16 @@ new Chart(climateChart, {
                 "type": "bar",
                 "label": "沖縄県・平均降水量",
                 "data": [107.0, 119.7, 161.4, 165.7, 231.6, 247.2, 141.4, 240.5, 260.5, 152.9, 110.2, 102.8],
-                "fill": false,
                 "borderColor": "rgb(75, 192, 192)",
                 "backgroundColor": "rgb(75, 192, 192)",
-                "lineTension": 0.1,
                 "yAxisID": "y-axis-1",
             },
             {
                 "type": "bar",
                 "label": "東京都",
                 "data": [52.3, 56.1, 117.5, 124.5, 137.8, 167.7, 153.5, 168.2, 209.9, 197.8, 92.5, 51.0],
-                "fill": false,
                 "borderColor": "rgb(130, 156, 167)",
                 "backgroundColor": "rgb(130, 156, 167)",
-                "lineTension": 0.1,
                 "yAxisID": "y-axis-1",
             },
         ]
