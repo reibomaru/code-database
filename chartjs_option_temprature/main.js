@@ -119,10 +119,10 @@ new Chart(climateChart, {
         scales: {
             yAxes: [
                 {
-                    id: "y-axis-1",   // Y軸のID
-                    type: "linear",   // linear固定 
-                    position: "left", // どちら側に表示される軸か？
-                    ticks: {          // スケール
+                    id: "y-axis-1",
+                    type: "linear",
+                    position: "left",
+                    ticks: {        
                         max: 300,
                         min: 0,
                     },
