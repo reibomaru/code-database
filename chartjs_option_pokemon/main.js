@@ -30,9 +30,6 @@ new Chart(pokemonChart, {
             }]
     },
     "options": {
-        "elements": {
-            "line": { "tension": 0, "borderWidth": 3 }
-        },
         scale: {
             ticks: {
                 suggestedMin: 0,
