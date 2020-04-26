@@ -43,14 +43,28 @@ VALUES
 (3, 1),
 (3, 2);
 
-SELECT blogs.title, blogs.content 
+SELECT * FROM blogs_tags;
+
+SELECT tags.name
+FROM tags
+INNER JOIN blogs_tags 
+ON blogs_tags.tag_id = tags.id 
+WHERE blogs_tags.blog_id = 1;
+
+SELECT tags.name
+FROM tags
+INNER JOIN blogs_tags 
+ON blogs_tags.tag_id = tags.id 
+WHERE blogs_tags.blog_id = 3;
+
+SELECT blogs.id, blogs.title, blogs.content 
 FROM blogs 
 INNER JOIN blogs_tags 
-ON blogs_tags.tag_id = blogs.id 
+ON blogs_tags.blog_id = blogs.id 
 WHERE blogs_tags.tag_id = 1;
 
-SELECT blogs.title, blogs.content 
+SELECT blogs.id, blogs.title, blogs.content 
 FROM blogs 
 INNER JOIN blogs_tags 
-ON blogs_tags.tag_id = blogs.id 
+ON blogs_tags.blog_id = blogs.id 
 WHERE blogs_tags.tag_id = 2;
