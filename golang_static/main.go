@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"net/http"
 	"os"
 	"text/template"
@@ -43,6 +44,7 @@ func dataHandler(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	dir, _ := os.Getwd()
+	log.Print(http.Dir(dir + "/static/"))
 	http.HandleFunc("/", mainHandler)
 	http.HandleFunc("/data/", dataHandler)
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir(dir+"/static/"))))
