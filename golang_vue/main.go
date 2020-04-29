@@ -7,7 +7,7 @@ import (
 	"text/template"
 )
 
-//ClimateDataElem 気温データの一つのデータセット
+//ClimateDataElem データの一つのデータセット
 type ClimateDataElem struct {
 	Label string
 	Data  []float64
