@@ -107,7 +107,7 @@ const TopPage = {
         <p>本サイトは沖縄県と東京都の気温と降水量を表示しています</p>
         <p>リンク</p>
         <router-link to="/temperature">気温を見る</router-link>
-        <router-link to="/precipitationChart">降水量を見る</router-link>
+        <router-link to="/precipitation">降水量を見る</router-link>
     </div>
     `
 }
@@ -118,7 +118,7 @@ const TemperatureChartPage = {
     template: `
     <div>
         <router-link to="/">トップに戻る</router-link>
-        <router-link to="/precipitationChart">降水量を見る</router-link>
+        <router-link to="/precipitation">降水量を見る</router-link>
         <div style="width:50%;">
             <temprature-chart></temprature-chart>
         </div>
@@ -147,7 +147,7 @@ const StatusNotFoundPage = {
 const routes = [
     { path: '/', component: TopPage },
     { path: '/temperature', component: TemperatureChartPage },
-    { path: '/precipitationChart', component: PrecipitationChartPage },
+    { path: '/precipitation', component: PrecipitationChartPage },
     { path: '*', component: StatusNotFoundPage },
 ]
 
