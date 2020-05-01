@@ -4,16 +4,13 @@ const HeaderComponet = {
 
 const TemperatureChart = {
     extends: VueChartJs.Line,
-    data() {
-        return {
-            jsonData: []
-        }
+    props: {
+        jsonData: Array
     },
     watch: {
         jsonData: {
             deep: true,
             handler: function () {
-                console.log(this.jsonData+'hi')
                 const data = []
                 for (let i = 0; i < this.jsonData.length; i++) {
                     data[i] = {
@@ -42,22 +39,13 @@ const TemperatureChart = {
                 )
             }
         } 
-    },
-    created() {
-        this.axios.get('/api/temprature/')
-            .then((response) => {
-                this.jsonData = response.data
-                console.log(this.jsonData)
-        })
     }
 }
 
 const PrecipitationChart = {
     extends: VueChartJs.Bar,
-    data() {
-        return {
-            jsonData: []
-        }
+    props: {
+        jsonData: Array
     },
     watch: {
         jsonData: {
@@ -91,17 +79,15 @@ const PrecipitationChart = {
             }
         }
     },
-    created() {
-        this.axios.get('/api/precipitation/')
-            .then((response) => {
-                this.jsonData = response.data
-            })
-    }
 }
 
 const TopPage = {
+    components: {
+        'header-component': HeaderComponet,
+    },
     template: `
     <div>
+        <header-component></header-component>
         <p>本サイトは沖縄県と東京都の気温と降水量を表示しています</p>
         <p>リンク</p>
         <router-link to="/temperature">気温を見る</router-link>
@@ -109,37 +95,73 @@ const TopPage = {
     </div>
     `
 }
+
 const TemperatureChartPage = {
+    data() {
+        return {
+            jsonData: []
+        }
+    },
     components: {
-        'temprature-chart': TemperatureChart
+        'header-component': HeaderComponet,
+        'temprature-chart': TemperatureChart,
+    },
+    created() {
+        this.axios.get('/api/temprature/')
+            .then((response) => {
+                this.jsonData = response.data
+            })
     },
     template: `
     <div>
+        <header-component></header-component>
         <router-link to="/">トップに戻る</router-link>
         <router-link to="/precipitation">降水量を見る</router-link>
         <div style="width:50%;">
-            <temprature-chart></temprature-chart>
+            <temprature-chart v-bind:jsonData="jsonData"></temprature-chart>
         </div>
     </div>
-    `
+    `,
 }
 
 const PrecipitationChartPage = {
+    data() {
+        return {
+            jsonData: []
+        }
+    },
     components: {
+        'header-component': HeaderComponet,
         'precipitation-chart': PrecipitationChart
+    },
+    created() {
+        this.axios.get('/api/precipitation/')
+            .then((response) => {
+                this.jsonData = response.data
+            })
     },
     template: `
     <div>
+        <header-component></header-component>
         <router-link to="/">トップに戻る</router-link>
         <router-link to="/temperature">気温を見る</router-link>
         <div style="width:50%;">
-            <precipitation-chart></precipitation-chart>
+            <precipitation-chart v-bind:jsonData="jsonData"></precipitation-chart>
         </div>
     </div>
-    `
+    `,
 }
+
 const StatusNotFoundPage = {
-    template: '<div>お探しのページは見つかりませんでした</div>'
+    components: {
+        'header-component': HeaderComponet,
+    },
+    template: `
+    <div>
+        <header-component></header-component>
+        <p>お探しのページは見つかりませんでした</p>
+    </div>
+    `,
 }
 
 const routes = [
@@ -155,8 +177,5 @@ const router = new VueRouter({
 
 new Vue({
     el: "#app",
-    components: {
-        'header-component':HeaderComponet
-    },
     router,
 })
